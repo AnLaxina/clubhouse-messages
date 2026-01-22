@@ -3,3 +3,18 @@
 @import url("./reset.css");
 @import url("./colors.css");
 @import url("./typography.css");
+
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+header,
+footer {
+  display: grid;
+  place-items: center;
+  padding: var(--size-2);
+  font-size: var(--font-size-2);
+}

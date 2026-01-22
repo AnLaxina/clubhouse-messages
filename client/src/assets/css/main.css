@@ -1,0 +1,5 @@
+/* This just combines all the css together. Used in main.jsx */
+@import url("https://unpkg.com/open-props");
+@import url("./reset.css");
+@import url("./colors.css");
+@import url("./typography.css");

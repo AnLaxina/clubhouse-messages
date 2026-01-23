@@ -1,12 +1,24 @@
-// TODO: Work on the pages now. Along with the Log in and View Messages stuff
 import FormButtons from "../../components/FormButtons/FormButtons.jsx";
 import styles from "./signup.module.css";
 
+import axios from "axios";
+
 export default function SignUp() {
+  function submitForm(event) {
+    event.preventDefault();
+    const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
+    const formData = new FormData(event.target);
+    const formValues = Object.fromEntries(formData);
+    axios
+      .post(`${baseUrl}/sign-up`, formValues, {
+        withCredentials: true,
+      })
+      .then((response) => console.log(response.data));
+  }
   return (
     <section className={styles.signupSection}>
       <h2>Sign Up</h2>
-      <form action="/sign-up" method="POST">
+      <form action="/sign-up" method="POST" onSubmit={(e) => submitForm(e)}>
         <label htmlFor="firstName">First Name</label>
         <input type="text" id="firstName" name="firstName" required />
 
@@ -31,16 +43,14 @@ export default function SignUp() {
           </p>
           <p className={styles.memberCode}>
             <label htmlFor="memberCode">
-              Membership Password{" "}
-              <em>
-                (Hint: A famous animal that starts with 'c' and ends in 'n')
-              </em>
+              Membership Password <em>(Hint: The Pokémon mascot!)</em>
             </label>
             <input type="password" id="memberCode" name="memberCode" />
           </p>
           <p className={styles.adminCode}>
             <label htmlFor="adminCode">
-              Admin Password <em>(Hint: The Pokémon mascot!)</em>
+              Admin Password{" "}
+              <em>(Hint: An animal that starts with 'c' and ends in 'n')</em>
             </label>
             <input type="password" id="adminCode" name="adminCode" />
           </p>

@@ -39,7 +39,9 @@ export default function SignUp() {
             <input type="password" id="memberCode" name="memberCode" />
           </p>
           <p className={styles.adminCode}>
-            <label htmlFor="adminCode">Admin Password</label>
+            <label htmlFor="adminCode">
+              Admin Password <em>(Hint: The Pokémon mascot!)</em>
+            </label>
             <input type="password" id="adminCode" name="adminCode" />
           </p>
         </fieldset>

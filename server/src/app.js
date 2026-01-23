@@ -7,6 +7,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 
 import "dotenv/config";
 import pool from "./db/pool.js";
+import signupRouter from "./routes/signupRoute.js";
 
 // Basic Setup
 const app = express();
@@ -74,6 +75,9 @@ passport.use(
     }
   }),
 );
+
+// Routes
+app.use(signupRouter);
 
 app.listen(PORT, (err) => {
   if (err) {

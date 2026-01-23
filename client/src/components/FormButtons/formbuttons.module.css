@@ -1,0 +1,23 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--size-5);
+  margin-top: var(--size-2);
+}
+
+.buttons a,
+.buttons button {
+  text-decoration: none;
+  padding: var(--size-2);
+  color: var(--text);
+  background-color: var(--secondary);
+  border-radius: var(--radius-2);
+  border: none;
+}
+
+.buttons a:hover,
+.buttons button:hover {
+  cursor: pointer;
+  filter: brightness(85%);
+}

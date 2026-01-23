@@ -2,7 +2,7 @@ header,
 footer {
   display: grid;
   place-items: center;
-  padding: var(--size-2);
+  padding: var(--size-1);
   font-size: var(--font-size-2);
 }
 

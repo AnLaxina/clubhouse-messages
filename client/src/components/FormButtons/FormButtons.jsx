@@ -1,0 +1,17 @@
+// This is for the bottom of each form
+import { Link } from "react-router";
+import styles from "./formbuttons.module.css";
+export default function FormButtons({
+  backButtonName,
+  backLink,
+  submitButtonName,
+}) {
+  return (
+    <div className={styles.buttons}>
+      <Link to={backLink} className="backLink">
+        {backButtonName}
+      </Link>
+      <button type="submit">{submitButtonName}</button>
+    </div>
+  );
+}

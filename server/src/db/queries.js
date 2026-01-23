@@ -29,6 +29,13 @@ export async function addUser(
   await pool.query(
     `INSERT INTO users (first_name, last_name, username, password, membership_status, is_admin)
                     VALUES ($1, $2, $3, $4, $5, $6);`,
-    [firstName, lastName, username, hashPassword, memberStatus, adminStatus],
+    [
+      firstName,
+      lastName,
+      username.trim(),
+      hashPassword,
+      memberStatus,
+      adminStatus,
+    ],
   );
 }

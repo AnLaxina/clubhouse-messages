@@ -1,4 +1,5 @@
 import pool from "./pool.js";
+import bcrypt from "bcryptjs";
 
 export async function getAllUsers() {
   const { rows } = await pool.query("SELECT * FROM users");
@@ -23,9 +24,11 @@ export async function addUser(
     adminStatus = true;
   }
 
+  const hashPassword = await bcrypt.hash(password, 10);
+
   await pool.query(
     `INSERT INTO users (first_name, last_name, username, password, membership_status, is_admin)
                     VALUES ($1, $2, $3, $4, $5, $6);`,
-    [firstName, lastName, username, password, memberStatus, adminStatus],
+    [firstName, lastName, username, hashPassword, memberStatus, adminStatus],
   );
 }

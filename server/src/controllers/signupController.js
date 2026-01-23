@@ -9,6 +9,7 @@ export function postValues(req, res, next) {
     formValues.password,
     formValues.memberCode,
     formValues.adminCode,
-  );
-  res.send({ message: "Success!" });
+  )
+    .then(() => res.send({ message: "User added!" }))
+    .catch(() => res.send({ message: "Could not add user!" }));
 }

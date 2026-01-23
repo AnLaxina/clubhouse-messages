@@ -8,7 +8,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import "dotenv/config";
 import pool from "./db/pool.js";
 import signupRouter from "./routes/signupRoute.js";
-
+import bcrypt from "bcryptjs";
 // Basic Setup
 const app = express();
 const PORT = 3000;
@@ -57,15 +57,18 @@ passport.deserializeUser(async (id, done) => {
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
-      const { rows } = pool.query("SELECT * FROM users WHERE username = $1", [
-        username,
-      ]);
+      const { rows } = await pool.query(
+        "SELECT * FROM users WHERE username = $1",
+        [username],
+      );
       const user = rows[0];
+
+      const matchedResult = await bcrypt.compare(password, user.password);
 
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password !== password) {
+      if (!matchedResult) {
         return done(null, false, { message: "Incorrect password" });
       }
 

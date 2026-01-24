@@ -2,11 +2,13 @@ import FormButtons from "../../components/FormButtons/FormButtons.jsx";
 import styles from "./signup.module.css";
 
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import axios from "axios";
 
 export default function SignUp() {
   const [loadingState, setLoadingState] = useState(false);
   const [invalidUsername, setInvalidUsername] = useState(false);
+  const navigate = useNavigate();
 
   function submitForm(event) {
     event.preventDefault();
@@ -21,6 +23,7 @@ export default function SignUp() {
       .then((response) => {
         console.log(response.data);
         setInvalidUsername(false);
+        navigate("/");
       })
       .catch((error) => {
         console.log(`Error: ${error.response.data.message}`);

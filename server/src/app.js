@@ -3,12 +3,13 @@ import session from "express-session";
 import connectPg from "connect-pg-simple";
 import cors from "cors";
 import passport from "passport";
+import bcrypt from "bcryptjs";
 import { Strategy as LocalStrategy } from "passport-local";
 
 import "dotenv/config";
 import pool from "./db/pool.js";
 import signupRouter from "./routes/signupRoute.js";
-import bcrypt from "bcryptjs";
+import loginRouter from "./routes/loginRoute.js";
 // Basic Setup
 const app = express();
 const PORT = 3000;
@@ -63,11 +64,10 @@ passport.use(
       );
       const user = rows[0];
 
-      const matchedResult = await bcrypt.compare(password, user.password);
-
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
+      const matchedResult = await bcrypt.compare(password, user.password);
       if (!matchedResult) {
         return done(null, false, { message: "Incorrect password" });
       }
@@ -81,6 +81,7 @@ passport.use(
 
 // Routes
 app.use(signupRouter);
+app.use(loginRouter);
 
 app.listen(PORT, (err) => {
   if (err) {

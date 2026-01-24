@@ -21,3 +21,8 @@
   cursor: pointer;
   filter: brightness(85%);
 }
+
+#loading {
+  filter: brightness(70%);
+  cursor: not-allowed;
+}

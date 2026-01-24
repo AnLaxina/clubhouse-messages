@@ -1,20 +1,34 @@
 import FormButtons from "../../components/FormButtons/FormButtons.jsx";
 import styles from "./signup.module.css";
 
+import { useState } from "react";
 import axios from "axios";
 
 export default function SignUp() {
+  const [loadingState, setLoadingState] = useState(false);
+  const [invalidUsername, setInvalidUsername] = useState(false);
+
   function submitForm(event) {
     event.preventDefault();
     const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
     const formData = new FormData(event.target);
     const formValues = Object.fromEntries(formData);
+    setLoadingState(true);
     axios
       .post(`${baseUrl}/sign-up`, formValues, {
         withCredentials: true,
       })
-      .then((response) => console.log(response.data));
+      .then((response) => {
+        console.log(response.data);
+        setInvalidUsername(false);
+      })
+      .catch((error) => {
+        console.log(`Error: ${error.response.data.message}`);
+        setInvalidUsername(true);
+      })
+      .finally(() => setLoadingState(false));
   }
+
   return (
     <section className={styles.signupSection}>
       <h2>Sign Up</h2>
@@ -25,7 +39,14 @@ export default function SignUp() {
         <label htmlFor="lastName">Last Name</label>
         <input type="text" id="lastName" name="lastName" required />
 
-        <label htmlFor="username">Username</label>
+        {invalidUsername ? (
+          <label htmlFor="username" className={styles.invalidUsername}>
+            Username is taken!
+          </label>
+        ) : (
+          <label htmlFor="username">Username</label>
+        )}
+
         <input type="text" id="username" name="username" required />
 
         <label htmlFor="password">Password</label>
@@ -60,6 +81,7 @@ export default function SignUp() {
           backButtonName={"Back"}
           backLink={"/"}
           submitButtonName={"Sign Up"}
+          loadingState={loadingState}
         />
       </form>
     </section>

@@ -19,7 +19,8 @@ export async function addUser(
 
   if (memberCode.toLowerCase() === "pikachu") {
     memberStatus = true;
-  } else if (adminCode.toLowerCase() === "chicken") {
+  }
+  if (adminCode.toLowerCase() === "chicken") {
     memberStatus = true;
     adminStatus = true;
   }

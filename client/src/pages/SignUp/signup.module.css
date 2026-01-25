@@ -27,6 +27,6 @@
 }
 
 .invalidUsername {
-  color: red;
+  color: var(--red-7);
   font-weight: var(--font-weight-7);
 }

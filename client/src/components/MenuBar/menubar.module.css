@@ -1,6 +1,7 @@
 .menuBar ul {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: var(--size-6);
   font-size: var(--font-size-3);
   padding: 0;
@@ -10,15 +11,18 @@
   list-style: none;
 }
 
-.menuBar a {
+.menuBar a,
+.menuBar button {
   padding: var(--size-3);
   background-color: var(--secondary);
   color: var(--text);
+  border: none;
   border-radius: var(--radius-2);
   text-decoration: none;
 }
 
-.menuBar a:hover {
+.menuBar a:hover,
+.menuBar button:hover {
   cursor: pointer;
   filter: brightness(85%);
 }

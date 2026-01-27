@@ -38,6 +38,24 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+// I'm not writing a route for logout... it's so short lol...
+app.post("/log-out", (req, res, next) => {
+  req.logout((error) => {
+    if (error) {
+      return next(error);
+    }
+
+    req.session.destroy((error) => {
+      if (error) {
+        return next(error);
+      }
+
+      res.clearCookie("connect.sid");
+
+      res.json({ message: "Logged out successfully!" });
+    });
+  });
+});
 
 passport.serializeUser(async (user, done) => {
   done(null, user.id);

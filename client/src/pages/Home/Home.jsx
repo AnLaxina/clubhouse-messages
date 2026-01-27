@@ -1,9 +1,22 @@
 import { Outlet } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 import styles from "./home.module.css";
 export default function Home() {
   const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/check-logged-in`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        setCurrentUser(response.data.user);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>

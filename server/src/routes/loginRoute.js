@@ -10,4 +10,6 @@ loginRouter.post(
   loginController.loginSuccess,
 );
 
+loginRouter.get("/api/check-logged-in", loginController.checkLoggedIn);
+
 export default loginRouter;

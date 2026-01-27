@@ -3,10 +3,13 @@ import FormButtons from "../../components/FormButtons/FormButtons.jsx";
 
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router";
 
 export default function LogIn() {
   const [isLoading, setIsLoading] = useState(false);
   const [invalidCreds, setInvalidCreds] = useState(false);
+  const [_, setCurrentUser] = useOutletContext();
+  const navigate = useNavigate();
 
   function login(event) {
     event.preventDefault();
@@ -18,8 +21,10 @@ export default function LogIn() {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         setInvalidCreds(false);
+        console.log(response.data.user);
+        setCurrentUser(response.data.user);
+        navigate("/");
       })
       .catch(() => setInvalidCreds(true))
       .finally(() => setIsLoading(false));

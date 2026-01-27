@@ -61,5 +61,3 @@ export async function editMessage(messageId, newTitle, newText) {
         [newTitle, newText, messageId],
     );
 }
-
-editMessage(3, "Cheese", "Lego");

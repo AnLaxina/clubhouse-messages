@@ -38,7 +38,7 @@ export default function MenuBar() {
         ) : (
           <>
             <li>
-              <NavLink to="view-messages">View Messages</NavLink>
+              <NavLink to="/messages">View Messages</NavLink>
             </li>
             <li>
               <button type="button" onClick={logOut}>

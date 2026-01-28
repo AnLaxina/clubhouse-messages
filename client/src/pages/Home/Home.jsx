@@ -12,7 +12,6 @@ export default function Home() {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         setCurrentUser(response.data.user);
       })
       .catch((error) => console.log(error));

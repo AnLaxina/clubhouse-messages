@@ -1,0 +1,28 @@
+.viewMessagesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--size-3);
+}
+
+.viewMessagesSection a,
+.viewMessagesSection button {
+  padding: var(--size-2);
+  background-color: var(--secondary);
+  color: var(--text);
+  border: none;
+  border-radius: var(--radius-2);
+  text-decoration: none;
+}
+
+.viewMessagesSection a:hover,
+.viewMessagesSection button:hover {
+  cursor: pointer;
+  filter: brightness(85%);
+}
+
+.navButtons {
+  display: flex;
+  gap: var(--size-3);
+  justify-content: center;
+}

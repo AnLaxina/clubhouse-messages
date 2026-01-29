@@ -2,6 +2,7 @@ import { useOutletContext, Link } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./viewmessages.module.css";
+import Messages from "../../components/Messages/Messages.jsx";
 
 export default function ViewMessages() {
   const [currentUser, setCurrentUser] = useOutletContext();
@@ -44,7 +45,7 @@ export default function ViewMessages() {
         <h3>Loading Messages...</h3>
       ) : (
         <>
-          <p>Done loading</p>
+          <Messages data={messages} isAdmin={isAdmin} isMember={isMember} />
         </>
       )}
 

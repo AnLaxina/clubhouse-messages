@@ -8,7 +8,7 @@ import * as db from "../db/queries.js";
 export async function getUser(req, res, next) {
   const { userId } = req.params;
   const user = await db.getUser(userId);
-  return user;
+  res.send({ user: user });
 }
 
 export async function getAllMessages(req, res, next) {

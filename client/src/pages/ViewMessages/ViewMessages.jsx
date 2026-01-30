@@ -45,7 +45,12 @@ export default function ViewMessages() {
         <h3>Loading Messages...</h3>
       ) : (
         <>
-          <Messages data={messages} isAdmin={isAdmin} isMember={isMember} />
+          <Messages
+            data={messages}
+            isAdmin={isAdmin}
+            isMember={isMember}
+            setMessages={setMessages}
+          />
         </>
       )}
 

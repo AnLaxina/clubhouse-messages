@@ -49,7 +49,9 @@ export async function addUser(
 }
 
 export async function getAllMessages() {
-  const { rows } = await pool.query(`SELECT * FROM messages;`);
+  const { rows } = await pool.query(`
+    SELECT * FROM messages
+    ORDER BY added_at DESC;`);
   return rows;
 }
 

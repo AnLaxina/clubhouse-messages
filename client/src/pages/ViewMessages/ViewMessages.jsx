@@ -12,11 +12,10 @@ export default function ViewMessages() {
   const [isMember, setIsMember] = useState(false);
 
   function setMemberStatus(userObject) {
-    if (userObject.isAdmin) {
+    if (userObject.is_admin) {
       setIsAdmin(true);
       setIsMember(true);
-    }
-    if (userObject.isMember) {
+    } else if (userObject.membership_status) {
       setIsMember(true);
     }
   }

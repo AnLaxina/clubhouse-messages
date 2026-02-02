@@ -1,0 +1,15 @@
+.confirmation {
+  padding: var(--size-5);
+  border: 4px solid var(--text);
+  border-radius: var(--radius-3);
+}
+.confirmationButtons {
+  display: flex;
+  margin-top: var(--size-4);
+  justify-content: center;
+  gap: var(--size-6);
+}
+.confirmation::backdrop {
+  background-color: grey;
+  opacity: 0.9;
+}

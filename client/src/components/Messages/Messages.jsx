@@ -1,13 +1,16 @@
 import styles from "./messages.module.css";
+import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup.jsx";
 
 import { formatDistanceToNowStrict, formatISO } from "date-fns";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CircleX, Dot } from "lucide-react";
 
 import axios from "axios";
 
 export default function Messages({ data, isAdmin, isMember, setMessages }) {
   const dialogRef = useRef(undefined);
+  const [selectedId, setSelectedId] = useState(undefined);
+
   useEffect(() => {
     async function getUsernames() {
       const oldMessages = [];
@@ -57,7 +60,7 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
                 <button
                   type="button"
                   className={styles.emptyButton}
-                  onClick={deleteMessage}
+                  onClick={() => showConfirmation(message.id)}
                 >
                   <CircleX size={20} strokeWidth={2} />
                 </button>
@@ -72,13 +75,14 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
     });
   }
 
-  function deleteMessage() {
-    console.log(`isAdmin: ${isAdmin} isMember: ${isMember}`);
-    showConfirmation();
+  function showConfirmation(selectedId) {
+    setSelectedId(selectedId);
+    console.log(`The id is: ${selectedId}`);
+    dialogRef.current.showModal();
   }
 
-  function showConfirmation() {
-    dialogRef.current.showModal();
+  function hideConfirmation() {
+    dialogRef.current.close();
   }
 
   return (
@@ -92,11 +96,7 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
               <time dateTime="YYYY-MM-DDTHH:mm:ss.sssZ">{getTimeAgo()}</time>
             </div>
             {isAdmin && (
-              <button
-                type="button"
-                className={styles.emptyButton}
-                onClick={deleteMessage}
-              >
+              <button type="button" className={styles.emptyButton}>
                 <CircleX size={20} strokeWidth={2} />
               </button>
             )}
@@ -110,19 +110,7 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
       </article>
       {addMessages()}
 
-      <dialog ref={dialogRef} className={styles.confirmation}>
-        <p>Are you sure you want to delete this message?</p>
-        <div className={styles.confirmationButtons}>
-          <button
-            type="button"
-            onClick={() => dialogRef.current.close()}
-            autoFocus
-          >
-            Cancel
-          </button>
-          <button type="button">Delete</button>
-        </div>
-      </dialog>
+      <ConfirmationPopup dialogRef={dialogRef} onConfirm={hideConfirmation} />
     </div>
   );
 }

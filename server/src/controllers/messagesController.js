@@ -5,6 +5,12 @@ import * as db from "../db/queries.js";
 //     await db.addMessage(userId, title, text);
 // }
 
+export async function deleteMessage(req, res, next) {
+  const { messageId } = req.params;
+  await db.deleteMessage(messageId);
+  res.send({ message: "Message successfully deleted!" });
+}
+
 export async function getUser(req, res, next) {
   const { userId } = req.params;
   const user = await db.getUser(userId);

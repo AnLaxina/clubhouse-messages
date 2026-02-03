@@ -9,7 +9,7 @@ import axios from "axios";
 
 export default function Messages({ data, isAdmin, isMember, setMessages }) {
   const dialogRef = useRef(undefined);
-  const [selectedId, setSelectedId] = useState(undefined);
+  const [messageId, setMessageId] = useState(undefined);
 
   useEffect(() => {
     async function getUsernames() {
@@ -75,13 +75,25 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
     });
   }
 
+  function deleteMessage(messageId) {
+    axios
+      .delete(
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/api/delete-message/${messageId}`,
+      )
+      .then((response) => {
+        console.log(response.data);
+        setMessages(data.filter((message) => messageId !== message.id));
+      })
+      .catch((error) => console.error(error));
+  }
   function showConfirmation(selectedId) {
-    setSelectedId(selectedId);
-    console.log(`The id is: ${selectedId}`);
+    setMessageId(selectedId);
     dialogRef.current.showModal();
   }
 
   function hideConfirmation() {
+    deleteMessage(messageId);
+    setMessageId(undefined);
     dialogRef.current.close();
   }
 

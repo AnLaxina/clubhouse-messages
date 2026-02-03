@@ -55,7 +55,7 @@ export default function ViewMessages() {
 
       <div className={styles.navButtons}>
         <Link to="/">Back</Link>
-        <button type="button">Add New Message</button>
+        <Link to="/new-message">Add New Message</Link>
       </div>
     </section>
   );

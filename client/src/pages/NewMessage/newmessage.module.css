@@ -8,3 +8,10 @@
 .success {
   color: var(--green-7);
 }
+
+.newMessageSection form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  padding: var(--size-3);
+}

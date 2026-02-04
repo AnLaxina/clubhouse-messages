@@ -62,6 +62,8 @@ export default function NewMessage() {
           id="text"
           autoCorrect="on"
           maxLength={70}
+          rows={4}
+          cols={30}
           placeholder="Maximum 70 characters"
           required
         ></textarea>

@@ -98,27 +98,6 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
 
   return (
     <div className={styles.messageContainer}>
-      <article className={styles.message}>
-        {isMember && (
-          <div className={styles.authorDetails}>
-            <div className={styles.leftCorner}>
-              <h4>Chicken Man</h4>
-              <Dot color="grey" />
-              <time dateTime="YYYY-MM-DDTHH:mm:ss.sssZ">{getTimeAgo()}</time>
-            </div>
-            {isAdmin && (
-              <button type="button" className={styles.emptyButton}>
-                <CircleX size={20} strokeWidth={2} />
-              </button>
-            )}
-          </div>
-        )}
-
-        <h3>Test Message</h3>
-        <p>
-          Well, you know how delicious chicken is? Yeah it's pretty damn good...
-        </p>
-      </article>
       {addMessages()}
 
       <ConfirmationPopup dialogRef={dialogRef} onConfirm={hideConfirmation} />

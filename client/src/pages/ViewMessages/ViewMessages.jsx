@@ -21,7 +21,12 @@ export default function ViewMessages() {
   }
 
   useEffect(() => {
+    // If user is not logged in, display messages anyways but don't bother with the member status
     if (!currentUser?.id) {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/get-messages`)
+        .then((response) => setMessages(response.data.messages))
+        .finally(() => setIsLoading(false));
       return;
     }
 
@@ -44,18 +49,23 @@ export default function ViewMessages() {
         <h3>Loading Messages...</h3>
       ) : (
         <>
-          <Messages
-            data={messages}
-            isAdmin={isAdmin}
-            isMember={isMember}
-            setMessages={setMessages}
-          />
+          {messages ? (
+            <Messages
+              data={messages}
+              isAdmin={isAdmin}
+              isMember={isMember}
+              setMessages={setMessages}
+            />
+          ) : (
+            <h4>No messages found! If you're a member or admin, add one!</h4>
+          )}
         </>
       )}
-
       <div className={styles.navButtons}>
         <Link to="/">Back</Link>
-        <Link to="/new-message">Add New Message</Link>
+        {(isAdmin || isMember) && (
+          <Link to="/new-message">Add New Message</Link>
+        )}
       </div>
     </section>
   );

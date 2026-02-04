@@ -34,6 +34,9 @@ export default function MenuBar() {
             <li>
               <NavLink to="/log-in">Log in</NavLink>
             </li>
+            <li>
+              <NavLink to="/messages">View Messages</NavLink>
+            </li>
           </>
         ) : (
           <>

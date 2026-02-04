@@ -1,6 +1,4 @@
 export function loginSuccess(req, res, next) {
-  console.log("Login successful!");
-  console.log(req.body);
   return res.json({ message: "Success!", user: req.user });
 }
 

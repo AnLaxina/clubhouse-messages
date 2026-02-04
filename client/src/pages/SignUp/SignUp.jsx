@@ -20,8 +20,7 @@ export default function SignUp() {
       .post(`${baseUrl}/sign-up`, formValues, {
         withCredentials: true,
       })
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         setInvalidUsername(false);
         navigate("/");
       })

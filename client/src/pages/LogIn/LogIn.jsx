@@ -22,7 +22,6 @@ export default function LogIn() {
       })
       .then((response) => {
         setInvalidCreds(false);
-        console.log(response.data.user);
         setCurrentUser(response.data.user);
         navigate("/");
       })

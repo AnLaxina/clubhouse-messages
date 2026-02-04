@@ -80,8 +80,7 @@ export default function Messages({ data, isAdmin, isMember, setMessages }) {
       .delete(
         `${import.meta.env.VITE_BACKEND_BASE_URL}/api/delete-message/${messageId}`,
       )
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         setMessages(data.filter((message) => messageId !== message.id));
       })
       .catch((error) => console.error(error));

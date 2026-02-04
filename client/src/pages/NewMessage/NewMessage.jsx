@@ -7,6 +7,9 @@ import axios from "axios";
 
 export default function NewMessage() {
   const [loadingState, setLoadingState] = useState(false);
+  const [addedSuccess, setAddedSuccess] = useState(false);
+  // 4000 milliseconds is 4 seconds
+  const REDIRECTION_TIME = 4000;
   const navigate = useNavigate();
 
   function addMessage(event) {
@@ -23,13 +26,26 @@ export default function NewMessage() {
           withCredentials: true,
         },
       )
-      .then(() => navigate("/messages"))
-      .finally(() => setLoadingState(false));
+      .then(() => {
+        setAddedSuccess(true);
+        setTimeout(() => {
+          setAddedSuccess(false);
+          navigate("/messages");
+        }, REDIRECTION_TIME);
+      })
+      .finally(() => {
+        setLoadingState(false);
+      });
   }
   return (
     <div className={styles.newMessageSection}>
       <h2>Create a New Message</h2>
       <form action="/api/add-message" onSubmit={(e) => addMessage(e)}>
+        {addedSuccess && (
+          <h3 className={styles.success}>
+            Added message! Redirecting to Messages page...
+          </h3>
+        )}
         <label htmlFor="title">Title</label>
         <input
           type="text"

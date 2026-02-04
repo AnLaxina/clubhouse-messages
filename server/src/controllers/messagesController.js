@@ -1,9 +1,12 @@
 import * as db from "../db/queries.js";
 
-// export async function addMessage(req, res, next) {
-//     const formValues = req.body;
-//     await db.addMessage(userId, title, text);
-// }
+export async function addMessage(req, res, next) {
+  const formValues = req.body;
+  const currentUser = req.user;
+
+  await db.addMessage(currentUser.id, formValues.title, formValues.text);
+  res.send({ message: "Message successfully added!" });
+}
 
 export async function deleteMessage(req, res, next) {
   const { messageId } = req.params;

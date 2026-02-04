@@ -10,4 +10,5 @@ messagesRouter.delete(
   messagesController.deleteMessage,
 );
 
+messagesRouter.post("/api/add-message", messagesController.addMessage);
 export default messagesRouter;

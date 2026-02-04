@@ -1,0 +1,6 @@
+.newMessageSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--size-3);
+}

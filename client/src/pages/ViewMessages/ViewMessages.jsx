@@ -49,7 +49,7 @@ export default function ViewMessages() {
         <h3>Loading Messages...</h3>
       ) : (
         <>
-          {messages ? (
+          {messages.length !== 0 ? (
             <Messages
               data={messages}
               isAdmin={isAdmin}
@@ -57,7 +57,9 @@ export default function ViewMessages() {
               setMessages={setMessages}
             />
           ) : (
-            <h4>No messages found! If you're a member or admin, add one!</h4>
+            <h3 className={styles.noMessages}>
+              No messages found! If you're a member or admin, add one!
+            </h3>
           )}
         </>
       )}

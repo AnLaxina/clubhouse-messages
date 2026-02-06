@@ -75,3 +75,24 @@ export async function editMessage(messageId, newTitle, newText) {
     [newTitle, newText, messageId],
   );
 }
+
+export async function editStatus(userId, memberCode, adminCode) {
+  let memberStatus = false;
+  let adminStatus = false;
+
+  if (memberCode.toLowerCase() === "pikachu") {
+    memberStatus = true;
+  }
+  if (adminCode.toLowerCase() === "chicken") {
+    memberStatus = true;
+    adminStatus = true;
+  }
+
+  await pool.query(
+    `UPDATE users
+                    SET membership_status = $1,
+                        is_admin = $2
+                    WHERE id = $3;`,
+    [memberStatus, adminStatus, userId],
+  );
+}

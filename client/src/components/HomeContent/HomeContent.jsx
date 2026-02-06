@@ -2,7 +2,6 @@ import MenuBar from "../MenuBar/MenuBar.jsx";
 import styles from "./homecontent.module.css";
 
 export default function HomeContent() {
-  // TODO: Make the instructions a bit better
   return (
     <div className={styles.homeContent}>
       <section className={styles.instructions}>

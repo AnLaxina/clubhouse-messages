@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp/SignUp.jsx";
 import LogIn from "./pages/LogIn/LogIn.jsx";
 import ViewMessages from "./pages/ViewMessages/ViewMessages.jsx";
 import NewMessage from "./pages/NewMessage/NewMessage.jsx";
+import AccessCode from "./pages/AccessCode/AccessCode.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "/log-in", Component: LogIn },
       { path: "/messages", Component: ViewMessages },
       { path: "/new-message", Component: NewMessage },
+      { path: "/access-code", Component: AccessCode },
     ],
   },
 ]);

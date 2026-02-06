@@ -43,6 +43,11 @@ export default function MenuBar() {
             <li>
               <NavLink to="/messages">View Messages</NavLink>
             </li>
+            {!currentUser.is_admin && !currentUser.membership_status && (
+              <li>
+                <NavLink to="/access-code">Enter Access Code</NavLink>
+              </li>
+            )}
             <li>
               <button type="button" onClick={logOut}>
                 Log out

@@ -1,12 +1,38 @@
 import styles from "./accesscode.module.css";
 import FormButtons from "../../components/FormButtons/FormButtons";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useOutletContext } from "react-router";
 import axios from "axios";
 
 export default function AccessCode() {
+  const [_, setCurrentUser] = useOutletContext();
   const [membership, setMembership] = useState("");
   const [admin, setAdmin] = useState("");
+
+  const memberRef = useRef(null);
+  const adminRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  // This useEffect is for keeping the inputs in sync with each other
+  useEffect(() => {
+    if (admin.toLowerCase() === "chicken") {
+      adminRef.current.classList.remove("invalidInput");
+      adminRef.current.classList.add("validInput");
+    } else {
+      adminRef.current.classList.remove("validInput");
+      adminRef.current.classList.add("invalidInput");
+    }
+
+    if (membership.toLowerCase() === "pikachu") {
+      memberRef.current.classList.remove("invalidInput");
+      memberRef.current.classList.add("validInput");
+    } else {
+      memberRef.current.classList.remove("validInput");
+      memberRef.current.classList.add("invalidInput");
+    }
+  }, [admin, membership]);
 
   function onSubmit(event) {
     event.preventDefault();
@@ -19,6 +45,10 @@ export default function AccessCode() {
         formValues,
         { withCredentials: true },
       )
+      .then((response) => {
+        setCurrentUser(response.data.user);
+        navigate("/");
+      })
       .catch((err) => console.error(err));
   }
 
@@ -44,6 +74,7 @@ export default function AccessCode() {
               type="password"
               id="memberCode"
               name="memberCode"
+              ref={memberRef}
               onChange={(e) => setMembership(e.target.value)}
             />
           </p>
@@ -56,6 +87,7 @@ export default function AccessCode() {
               type="password"
               id="adminCode"
               name="adminCode"
+              ref={adminRef}
               onChange={(e) => setAdmin(e.target.value)}
             />
           </p>
@@ -64,8 +96,11 @@ export default function AccessCode() {
         <FormButtons
           backButtonName="Back"
           backLink="/"
-          loadingState={membership === "" && admin === ""}
-          loadingName="Enter a Code First!"
+          loadingState={
+            membership.toLowerCase() !== "pikachu" &&
+            admin.toLowerCase() !== "chicken"
+          }
+          loadingName="Enter one valid code!"
           submitButtonName="Enter Access Code(s)"
         />
       </form>

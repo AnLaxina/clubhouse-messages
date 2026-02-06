@@ -5,5 +5,7 @@ export async function checkMemberStatus(req, res, next) {
   const formValues = req.body;
 
   await db.editStatus(userId, formValues.memberCode, formValues.adminCode);
-  res.send({ chicken: "Mambo" });
+
+  const updatedUser = await db.getUser(userId);
+  res.send({ user: updatedUser });
 }

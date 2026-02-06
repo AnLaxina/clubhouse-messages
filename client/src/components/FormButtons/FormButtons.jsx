@@ -6,6 +6,7 @@ export default function FormButtons({
   backLink,
   submitButtonName,
   loadingState = false,
+  loadingName = "Loading",
 }) {
   return (
     <div className={styles.buttons}>
@@ -15,7 +16,7 @@ export default function FormButtons({
 
       {loadingState ? (
         <button type="submit" id={styles.loading} disabled>
-          Loading
+          {loadingName}
         </button>
       ) : (
         <button type="submit">{submitButtonName}</button>

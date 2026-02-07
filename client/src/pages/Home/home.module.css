@@ -1,5 +1,5 @@
-header,
-footer {
+:global(header),
+:global(footer) {
   display: grid;
   place-items: center;
   padding: var(--size-1);
@@ -7,7 +7,7 @@ footer {
 }
 
 @media (width <= 640px) {
-  header {
+  :global(header) {
     text-align: center;
     font-size: var(--font-size-0);
   }

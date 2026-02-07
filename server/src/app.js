@@ -105,6 +105,9 @@ app.use(signupRouter);
 app.use(loginRouter);
 app.use(messagesRouter);
 app.use(adminCodeRouter);
+app.get("/", (req, res, next) => {
+  res.send("Welcome to the homepage of the backend!");
+});
 
 app.listen(PORT, (err) => {
   if (err) {
